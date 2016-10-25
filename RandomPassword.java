@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class RandomPassword {
     public static void main(String[] args) {
-        String sourceOfPassword = partOfSource('A', 26) + partOfSource('a', 26) + partOfSource('0', 10) + "!@#$%&()?";
+        String sourceOfPassword = partOfSource('A', 26).concat(partOfSource('a', 26)).concat(partOfSource('0', 10)).concat("!@#$%&()?");
         int lengthOfPassword = 8;
         System.out.println("Генерация случайного пароля длинной " + lengthOfPassword + " символов.");
         System.out.println("Ваш пароль: " + createPassword(sourceOfPassword, lengthOfPassword));
@@ -13,20 +13,16 @@ public class RandomPassword {
         for (int i = 0; i < sourceOfPassword.length; i++) {
             sourceOfPassword[i] = (char) (ch + i);
         }
-        String s = "";
-        for (char a : sourceOfPassword) s = s + a;
-        return s;
+        return String.valueOf(sourceOfPassword);
     }
 
     private static String createPassword(String source, int length) {
         Random random = new Random();
-        String password = "";
+        char password[] = new char[length];
         for (int i = 0; i < length; i++) {
-            password += source.charAt(random.nextInt(source.length()));
+            password[i] = source.charAt(random.nextInt(source.length()));
         }
-        return password;
+        return String.valueOf(password);
     }
-
-
 }
 
